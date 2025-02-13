@@ -1,0 +1,75 @@
+{
+  "name": "bubt-faculty-scraper",
+  "version": "1.0",
+  "description": "Scrapes faculty information from the BUBT websites",
+  "keywords": [
+    "BUBT",
+    "academic data",
+    "academic",
+    "data extraction",
+    "education",
+    "faculty profiles",
+    "faculty",
+    "html",
+    "json",
+    "professors",
+    "profile",
+    "researchers",
+    "scraper",
+    "university scraper",
+    "university",
+    "web scraping"
+  ],
+  "homepage": "https://github.com/kurtnettle",
+  "bugs": {
+    "url": "https://github.com/kurtnettle/bubt-faculty-scraper/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kurtnettle/bubt-faculty-scraper.git"
+  },
+  "author": "Shaikh Shafeen <kurtnettle@protonmail.com> (https://github.com/kurtnettle)",
+  "license": "GPL-3.0-only",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "npx tsx src/main.ts",
+    "build": "npm run clean && esbuild src/main.ts --bundle --platform=node --target=node22 --outfile=dist/bubt-faculty-scraper.js --minify",
+    "dev": "npx tsx watch src/main.ts",
+    "lint": "xo src/",
+    "lint:fix": "xo --fix src/",
+    "test": "npm run lint && npm run type-check",
+    "type-check": "tsc --noEmit",
+    "clean": "rimraf dist",
+    "prepare": "husky",
+    "format:prettier": "prettier --write '*.{md,json}'",
+    "format:prettier:check": "prettier --check '*.{md,json}'"
+  },
+  "lint-staged": {
+    "*.{json,md}": "npm run format:prettier",
+    "src/**/*.ts": "npm run lint:fix"
+  },
+  "files": [
+    "src"
+  ],
+  "xo": {
+    "space": true,
+    "prettier": true
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.3.1",
+    "chalk": "^5.4.1",
+    "cheerio": "^1.0.0",
+    "commander": "^13.1.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.2",
+    "esbuild": "^0.25.0",
+    "globals": "^15.15.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.5.1",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3",
+    "xo": "^0.60.0"
+  }
+}
