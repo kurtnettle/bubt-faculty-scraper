@@ -1,11 +1,9 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-import {cwd} from 'node:process';
 import {Command} from 'commander';
 import {handleCommon} from './handlers.js';
 
-const packageJsonPath = path.join(cwd(), 'package.json');
-const packageInfo = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+const packageInfo = JSON.parse(
+  Buffer.from(process.env.NPM_PKG_BASE64, 'base64').toString('utf8'),
+);
 
 export const program = new Command();
 

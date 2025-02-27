@@ -33,7 +33,7 @@
   "main": "src/main.ts",
   "scripts": {
     "start": "npx tsx src/main.ts",
-    "build": "npm run clean && esbuild src/main.ts --bundle --platform=node --target=node22 --outfile=dist/bubt-faculty-scraper.js --minify",
+    "build": "npm run clean && node esbuild.config.js",
     "dev": "npx tsx watch src/main.ts",
     "lint": "xo src/",
     "lint:fix": "xo --fix src/",
