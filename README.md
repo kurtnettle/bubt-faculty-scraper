@@ -58,9 +58,17 @@ Effortlessly extract _structured_ faculty information from the [BUBT](https://bu
   "designation": "Assistant Professor",
   "room": "421",
   "building": "2",
-  "telephone": { "office": "016xxxxx" },
-  "email": "masudulislam11@gmail.com",
-  "status": "Active",
+  "telephone": {
+    "office": [
+      "016xxxxx"
+    ]
+  },
+  "email": {
+    "personal": [
+      "masudulislam11@gmail.com"
+    ]
+  },
+  "status": "active",
   "profileUrl": "https://cse.bubt.edu.bd/facultydetails/29/"
 }
 ```
