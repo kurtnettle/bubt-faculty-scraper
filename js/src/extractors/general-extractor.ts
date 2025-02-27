@@ -5,7 +5,7 @@ import {type FacultyInfo} from '../types.js';
 import {logger} from '../index.js';
 import {type CustomExtractor} from '../interface.js';
 import {logError} from '../utils.js';
-import {getDeptId, getText} from './utils/index.js';
+import {getDeptId, categorizeEmailByDomain, getText} from './utils/index.js';
 
 /**
  * A custom general extractor for `https://bubt.edu.bd`.
@@ -115,7 +115,7 @@ export class GeneralExtractor implements CustomExtractor {
         }
       });
 
-      email = email.trim();
+      email = categorizeEmailByDomain(email) ?? '';
       fcode = fcode.trim();
 
       return {

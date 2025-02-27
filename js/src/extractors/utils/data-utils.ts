@@ -106,3 +106,33 @@ export function simplifyContactInfo(
 
   return flattened;
 }
+
+/**
+ * Categorizes an email address based on its domain and returns it in an array.
+ *
+ * @param {string} value - The email address to categorize.
+ * @returns {ContactInfo | undefined} - An object containing the categorized email address as an array:
+ *   - `personal`: If the email domain is a common personal domain (e.g., gmail, yahoo, hotmail, outlook).
+ *   - `office`: If the email domain matches `bubt.edu`.
+ *   - `other`: If the email domain does not match any predefined categories.
+ *   - `undefined`: If the input is an empty string after trimming.
+ */
+export function categorizeEmailByDomain(
+  value: string,
+): ContactInfo | undefined {
+  value = value.trim();
+  if (!value) return undefined;
+
+  const domainCategories = {
+    personal: /@(gmail|yahoo|hotmail|outlook)\.\w+/i,
+    office: /@bubt\.edu/i,
+  };
+
+  for (const [category, regex] of Object.entries(domainCategories)) {
+    if (regex.test(value)) {
+      return {[category]: [value]};
+    }
+  }
+
+  return {other: [value]};
+}

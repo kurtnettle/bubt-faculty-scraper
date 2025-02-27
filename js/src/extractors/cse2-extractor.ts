@@ -10,6 +10,7 @@ import {
   validateAndSplitPhoneNumbers,
   cleanContactInfoEmptyFields,
   parseRoomAndBuilding,
+  categorizeEmailByDomain,
 } from './utils/index.js';
 
 /**
@@ -41,7 +42,10 @@ export class Cse2Extractor implements CustomExtractor {
       const name = getText('div.fac_title a h3', element);
       const designation = getText('div.fac_title h6', element);
 
-      const email = getText('div.s_f_cart:nth-child(1) p', element);
+      const email =
+        categorizeEmailByDomain(
+          getText('div.s_f_cart:nth-child(1) p', element),
+        ) ?? '';
 
       const status = getText('div.fac_title a+span', element);
 
@@ -101,7 +105,8 @@ export class Cse2Extractor implements CustomExtractor {
 
       const name = getText('div.fac_title > h2', container);
       const designation = getText('div.fac_title > h6', container);
-      const email = getText('div.f_mail > a', container);
+      const email =
+        categorizeEmailByDomain(getText('div.f_mail > a', container)) ?? '';
 
       const phoneCellText = container
         .find('div.fac_cart > div.f_cell > p')
