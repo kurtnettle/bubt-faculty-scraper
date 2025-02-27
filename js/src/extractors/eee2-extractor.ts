@@ -269,7 +269,6 @@ export class Eee2Extractor implements CustomExtractor {
       }
     }
 
-    const cleaned = this.cleanEmptyContactField(data);
-    return this.unwrapSingleContactElementArrays(cleaned);
+    return this.cleanEmptyContactField(data);
   }
 }

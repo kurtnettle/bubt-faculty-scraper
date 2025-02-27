@@ -9,7 +9,6 @@ import {
   getDeptId,
   validateAndSplitPhoneNumbers,
   cleanContactInfoEmptyFields,
-  simplifyContactInfo,
   parseRoomAndBuilding,
 } from './utils/index.js';
 
@@ -169,6 +168,6 @@ export class Cse2Extractor implements CustomExtractor {
       );
     }
 
-    return simplifyContactInfo(cleanContactInfoEmptyFields(data));
+    return cleanContactInfoEmptyFields(data);
   }
 }
