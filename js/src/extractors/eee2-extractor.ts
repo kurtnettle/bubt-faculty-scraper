@@ -167,6 +167,24 @@ export class Eee2Extractor implements CustomExtractor {
     return cleaned;
   }
 
+  private getEmailType(fieldType: string): string {
+    const emailTypeMap: Record<string, string> = {
+      pe: 'personal',
+      oe: 'office',
+      email: 'other',
+    };
+    return emailTypeMap[fieldType] || 'other';
+  }
+
+  private getPhoneType(fieldType: string): string {
+    const phoneTypeMap: Record<string, string> = {
+      pp: 'personal',
+      op: 'office',
+      phone: 'other',
+    };
+    return phoneTypeMap[fieldType] || 'other';
+  }
+
   private parseProfilePageContactCell(text: string): ContactData {
     const contactRowLines = text
       .split('\n')
@@ -232,33 +250,24 @@ export class Eee2Extractor implements CustomExtractor {
           break;
         }
 
-        case 'pe': {
-          data.email?.personal?.push(value);
-          break;
-        }
-
-        case 'oe': {
-          data.email?.office?.push(value);
-          break;
-        }
-
+        case 'pe':
+        case 'oe':
         case 'email': {
-          data.email?.other?.push(value);
+          const emailType = this.getEmailType(fieldType);
+          data.email[emailType] = [
+            ...new Set([...data.email[emailType], value]),
+          ];
           break;
         }
 
-        case 'pp': {
-          data.phone?.personal?.push(validateAndSplitPhoneNumbers(value));
-          break;
-        }
-
-        case 'op': {
-          data.phone?.office?.push(validateAndSplitPhoneNumbers(value));
-          break;
-        }
-
+        case 'pp':
+        case 'op':
         case 'phone': {
-          data.phone?.other?.push(validateAndSplitPhoneNumbers(value));
+          const result = validateAndSplitPhoneNumbers(value);
+          const phoneType = this.getPhoneType(fieldType);
+          data.phone[phoneType] = [
+            ...new Set([...data.phone[phoneType], ...result]),
+          ];
           break;
         }
 

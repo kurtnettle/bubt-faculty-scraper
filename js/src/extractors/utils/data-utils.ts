@@ -33,7 +33,7 @@ export function validateAndSplitPhoneNumbers(
     return '';
   }
 
-  return numbers.length === 1 ? numbers[0] : numbers;
+  return numbers;
 }
 
 /**

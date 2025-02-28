@@ -166,11 +166,7 @@ export class Cse2Extractor implements CustomExtractor {
         category = 'other';
       }
 
-      data[category].push(
-        ...(Array.isArray(validatedNumbers)
-          ? validatedNumbers
-          : [validatedNumbers]),
-      );
+      data[category] = [...new Set([...data[category], ...validatedNumbers])];
     }
 
     return cleanContactInfoEmptyFields(data);
