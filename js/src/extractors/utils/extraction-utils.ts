@@ -12,6 +12,7 @@ import {
 import {DepartmentAlias} from '../../constants.js';
 import {rootDir} from '../../config.js';
 import {logError} from '../../utils.js';
+import {CivilEngrExtractor} from '../civilengr-extractor.js';
 import {getSnapshotDates} from './folder-utils.js';
 
 /**
@@ -147,6 +148,10 @@ export function getCustomExtractorInstance(
 
     case DepartmentAlias.eee2: {
       return new Eee2Extractor();
+    }
+
+    case DepartmentAlias.civil: {
+      return new CivilEngrExtractor(config.alias);
     }
 
     default: {
